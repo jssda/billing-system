@@ -1,10 +1,10 @@
-package org.team.cuc.billingsystem.eurekaserver;
+package org.team.cuc.billingsystem.eurekaclientdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EurekaServerApplicationTests {
+class EurekaClientDemoApplicationTests {
 
     @Test
     void contextLoads() {
