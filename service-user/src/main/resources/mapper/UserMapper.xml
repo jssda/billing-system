@@ -28,9 +28,21 @@
         sub_type,company,admin,
         balance
     </sql>
+    <insert id="saveOne" parameterType="UserPo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user(<include refid="Base_Column_List"/>)
+        values(null, #{parentUin}, #{realName}, #{userName}, #{avatar}, #{email}, #{type}, #{userCode}, #{userId},
+        #{subType}, #{company}, #{admin}, #{balance})
+    </insert>
     <select id="selectAllUsers" resultType="org.team.cuc.billingsystem.po.userservice.UserPo">
         select
         <include refid="Base_Column_List"/>
         from t_user;
+    </select>
+    <select id="selectUserByUserCode" resultType="org.team.cuc.billingsystem.po.userservice.UserPo"
+            parameterType="string">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where user_code = #{userCode}
     </select>
 </mapper>

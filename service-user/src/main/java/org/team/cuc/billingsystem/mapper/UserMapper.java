@@ -1,6 +1,7 @@
 package org.team.cuc.billingsystem.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.team.cuc.billingsystem.po.userservice.UserPo;
 
 import java.util.List;
@@ -21,6 +22,23 @@ public interface UserMapper {
      * @return 返回查询到的用户信息
      */
     List<UserPo> selectAllUsers();
+
+
+    /**
+     * 查询用户
+     *
+     * @param userCode 用户唯一编码
+     * @return 用户信息
+     */
+    UserPo selectUserByUserCode(@Param("userCode") String userCode);
+
+    /**
+     * 存储一个用户信息
+     *
+     * @param userPo 用户实体
+     * @return 用户信息
+     */
+    Integer saveOne(UserPo userPo);
 }
 
 

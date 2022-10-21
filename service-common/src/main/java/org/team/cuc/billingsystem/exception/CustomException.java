@@ -1,7 +1,7 @@
 package org.team.cuc.billingsystem.exception;
 
 
-import org.team.cuc.billingsystem.utils.ExceptionUtils;
+import org.team.cuc.billingsystem.utils.ExceptionUtil;
 
 /**
  * 自定义异常
@@ -45,7 +45,7 @@ public class CustomException extends RuntimeException {
     }
 
     public static CustomException systemException(Exception e) {
-        return new CustomException(ExceptionCode.SYSTEM_ERROR, ExceptionUtils.getStackTraceInfo(e),
+        return new CustomException(ExceptionCode.SYSTEM_ERROR, ExceptionUtil.getStackTraceInfo(e),
                 ExceptionCode.SYSTEM_ERROR.getDesc());
     }
 
@@ -54,11 +54,11 @@ public class CustomException extends RuntimeException {
     }
 
     public static CustomException userException(Exception e, String info) {
-        return new CustomException(ExceptionCode.USER_INPUT_ERROR, ExceptionUtils.getStackTraceInfo(e), info);
+        return new CustomException(ExceptionCode.USER_INPUT_ERROR, ExceptionUtil.getStackTraceInfo(e), info);
     }
 
     public static CustomException userException(Exception e) {
-        return new CustomException(ExceptionCode.USER_INPUT_ERROR, ExceptionUtils.getStackTraceInfo(e),
+        return new CustomException(ExceptionCode.USER_INPUT_ERROR, ExceptionUtil.getStackTraceInfo(e),
                 ExceptionCode.USER_INPUT_ERROR.getDesc());
     }
 

@@ -18,4 +18,12 @@ public interface UserService {
      * @return 返回查询到的用户信息
      */
     List<UserPo> listUsers();
+
+    /**
+     * 获取用户信息
+     *
+     * @param token token
+     * @return 返回查询到的用户信息
+     */
+    UserPo getUserInfo(String token);
 }

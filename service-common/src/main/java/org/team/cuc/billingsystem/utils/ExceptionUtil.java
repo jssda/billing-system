@@ -6,7 +6,7 @@ import java.io.StringWriter;
 /**
  * @author jssd jssdjing@gmail.com
  */
-public class ExceptionUtils {
+public class ExceptionUtil {
 
     /**
      * 获取e.printStackTrace() 的具体信息，赋值给String 变量，并返回
