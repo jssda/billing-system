@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.team.cuc.billingsystem.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="org.team.cuc.billingsystem.po.userservice.UserPo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="parentUin" column="parent_uin" jdbcType="INTEGER"/>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="CHAR"/>
+        <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="subType" column="sub_type" jdbcType="VARCHAR"/>
+        <result property="company" column="company" jdbcType="VARCHAR"/>
+        <result property="admin" column="admin" jdbcType="TINYINT"/>
+        <result property="balance" column="balance" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,parent_uin,real_name,
+        user_name,avatar,email,
+        type,user_code,user_id,
+        sub_type,company,admin,
+        balance
+    </sql>
+    <select id="selectAllUsers" resultType="org.team.cuc.billingsystem.po.userservice.UserPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user;
+    </select>
+</mapper>

@@ -1,0 +1,2 @@
+### 查询所有用户信息
+GET http://localhost:8080/users
