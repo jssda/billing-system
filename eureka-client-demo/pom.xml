@@ -6,7 +6,6 @@
         <groupId>org.team.cuc.billingsystem</groupId>
         <artifactId>billing-system</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>eureka-client-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -30,6 +29,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.team.cuc.billingsystem</groupId>
+            <artifactId>service-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

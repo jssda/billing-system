@@ -6,7 +6,6 @@
         <groupId>org.team.cuc.billingsystem</groupId>
         <artifactId>billing-system</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>eureka-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
