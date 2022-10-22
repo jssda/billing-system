@@ -18,6 +18,7 @@
         <result property="company" column="company" jdbcType="VARCHAR"/>
         <result property="admin" column="admin" jdbcType="TINYINT"/>
         <result property="balance" column="balance" jdbcType="DOUBLE"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -26,12 +27,12 @@
         user_name,avatar,email,
         type,user_code,user_id,
         sub_type,company,admin,
-        balance
+        balance,create_time
     </sql>
     <insert id="saveOne" parameterType="UserPo" useGeneratedKeys="true" keyProperty="id">
         insert into t_user(<include refid="Base_Column_List"/>)
         values(null, #{parentUin}, #{realName}, #{userName}, #{avatar}, #{email}, #{type}, #{userCode}, #{userId},
-        #{subType}, #{company}, #{admin}, #{balance})
+        #{subType}, #{company}, #{admin}, #{balance}, #{createTime})
     </insert>
     <select id="selectAllUsers" resultType="org.team.cuc.billingsystem.po.userservice.UserPo">
         select
