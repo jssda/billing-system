@@ -45,4 +45,10 @@
         from t_user
         where user_code = #{userCode}
     </select>
+    <select id="selectUserById" resultType="org.team.cuc.billingsystem.po.userservice.UserPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where id = #{id}
+    </select>
 </mapper>

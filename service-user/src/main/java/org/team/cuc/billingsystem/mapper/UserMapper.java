@@ -39,6 +39,14 @@ public interface UserMapper {
      * @return 用户信息
      */
     Integer saveOne(UserPo userPo);
+
+    /**
+     * 通过主键查询用户信息
+     *
+     * @param id 用户id
+     * @return 返回查询到的用户信息， 如果没有查询到  返回null
+     */
+    UserPo selectUserById(@Param("id") int id);
 }
 
 

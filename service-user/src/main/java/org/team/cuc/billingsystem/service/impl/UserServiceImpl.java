@@ -82,6 +82,10 @@ public class UserServiceImpl implements UserService {
         return userPo;
     }
 
+    @Override
+    public UserPo getUserById(Integer id) {
+        return userMapper.selectUserById(id);
+    }
 }
 
 

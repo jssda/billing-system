@@ -28,9 +28,14 @@ public class UserController {
         return userService.listUsers();
     }
 
-    @GetMapping("/{token}")
+    @GetMapping("/token/{token}")
     public UserPo getUserInfo(@NotEmpty(message = "token is null") @PathVariable String token) {
         return userService.getUserInfo(token);
+    }
+
+    @GetMapping("/id/{id}")
+    public UserPo getUserById(@NotEmpty(message = "id is null") @PathVariable Integer id) {
+        return userService.getUserById(id);
     }
 
 }

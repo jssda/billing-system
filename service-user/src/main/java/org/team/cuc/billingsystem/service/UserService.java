@@ -26,4 +26,12 @@ public interface UserService {
      * @return 返回查询到的用户信息
      */
     UserPo getUserInfo(String token);
+
+    /**
+     * 通过id主键获取用户信息
+     *
+     * @param id id主键
+     * @return 返回查询到的用户信息
+     */
+    UserPo getUserById(Integer id);
 }
