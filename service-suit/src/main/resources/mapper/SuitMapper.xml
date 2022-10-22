@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.team.cuc.billingsystem.servicesuit.suitMapper.SuitMapper">
+
+    <resultMap id="BaseResultMap" type="org.team.cuc.billingsystem.po.suitservice.SuitPo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="suitType" column="suitType" jdbcType="INTEGER"/>
+        <result property="costType" column="costType" jdbcType="INTEGER"/>
+        <result property="price" column="price" jdbcType="DOUBLE"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,name,suitType,
+        costType,price,status
+    </sql>
+    <insert id="saveOne" parameterType="SuitPo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_suit(<include refid="Base_Column_List"/>)
+        values(null, #{name}, #{suitType}, #{costType}, #{price}, #{status})
+    </insert>
+    <select id="selectAllSuits" resultType="org.team.cuc.billingsystem.po.suitservice.SuitPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_suit;
+    </select>
+    <update id="updateById" parameterType="SuitPo">
+        update t_suit
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="suitType != null">
+                suitType = #{suitType},
+            </if>
+            <if test="costType != null">
+                costType = #{costType},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="selectSuitById" parameterType="Integer" resultType="org.team.cuc.billingsystem.po.suitservice.SuitPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_suit
+        where id = #{id}
+    </select>
+</mapper>

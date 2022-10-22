@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: service-suit
+
+  # 数据库信息
+  datasource:
+    url: jdbc:mysql://123.57.39.124:3306/billing_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: liuHao123.
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8012
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8011/eureka/
+
+mybatis:
+  type-aliases-package: org.team.cuc.billingsystem.po.suitservice
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    org.team.cuc.billingsystem.mapper: debug
+    org.team.cuc.billingsystem.service: debug
+    org.team.cuc.billingsystem.advice: debug
