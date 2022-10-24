@@ -1,4 +1,4 @@
-package org.team.cuc.billingsystem.bean;
+package org.team.cuc.billingsystem.bean.bo;
 
 import lombok.Data;
 import org.team.cuc.billingsystem.exception.CustomException;

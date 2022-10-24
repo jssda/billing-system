@@ -8,7 +8,7 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-import org.team.cuc.billingsystem.bean.AjaxResponse;
+import org.team.cuc.billingsystem.bean.bo.AjaxResponse;
 
 /**
  * 使响应状态码设置和返回状态码一致

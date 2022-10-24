@@ -7,7 +7,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.team.cuc.billingsystem.bean.AjaxResponse;
+import org.team.cuc.billingsystem.bean.bo.AjaxResponse;
 import org.team.cuc.billingsystem.exception.CustomException;
 import org.team.cuc.billingsystem.exception.ExceptionCode;
 

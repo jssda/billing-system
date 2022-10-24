@@ -17,8 +17,69 @@
         id
         ,code,type,channel,amount,create_time
     </sql>
+    <insert id="insertRecordPo" parameterType="TransactionRecordPo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_transaction_record (id, code, type, channel, amount, create_time)
+        values (null, #{code}, #{type}, #{channel}, #{amount}, #{createTime})
+    </insert>
     <select id="selectAll" resultType="org.team.cuc.billingsystem.po.transaction.TransactionRecordPo">
         select * from
         <include refid="Base_Column_List"/>
+    </select>
+    <select id="selectByConditionPage"
+            resultType="org.team.cuc.billingsystem.po.transaction.TransactionRecordPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_transaction_record
+        <where>
+            <if test="id != null">
+                And id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="code != null">
+                And code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null">
+                And type = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test="channel != null">
+                And channel = #{channel,jdbcType=VARCHAR}
+            </if>
+            <if test="amount != null">
+                And amount = #{amount,jdbcType=DOUBLE}
+            </if>
+            <if test="startTime != null">AND create_time <![CDATA[>=]]> #{startTime}</if>
+            <if test="endTime != null">AND create_time <![CDATA[<=]]>#{endTime}</if>
+        </where>
+        <if test="pageSize != null and pageNum != null">
+            limit #{offset}, #{pageSize}
+        </if>
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select
+        count(1)
+        from
+        (
+        select
+        <include refid="Base_Column_List"/>
+        from t_transaction_record
+        <where>
+            <if test="id != null">
+                And id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="code != null">
+                And code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null">
+                And type = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test="channel != null">
+                And channel = #{channel,jdbcType=VARCHAR}
+            </if>
+            <if test="amount != null">
+                And amount = #{amount,jdbcType=DOUBLE}
+            </if>
+            <if test="startTime != null">AND create_time <![CDATA[>=]]> #{startTime}</if>
+            <if test="endTime != null">AND create_time <![CDATA[<=]]>#{endTime}</if>
+        </where>
+        ) t1
     </select>
 </mapper>
