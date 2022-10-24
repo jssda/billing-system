@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 建议将驱动类拷到项目中该位置 -->
+    <classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\8.0.30\mysql-connector-java-8.0.30.jar"/>
+
+    <!--context里面的值不用修改 -->
+    <context id="oscarTables" targetRuntime="MyBatis3">
+        <!-- 引入自定义controller service插件 -->
+
+
+        <!-- jdbcConnection 需要能连通，driverClass为数据库驱动的入口类 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://123.57.39.124:3306/billing_system"
+                        userId="root"
+                        password="liuHao123.">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 生成实体类的配置-->
+        <javaModelGenerator targetPackage="alipay.bean" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--  生成xml的配置-->
+        <sqlMapGenerator targetPackage="alipay.mapper"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 生成mapper的配置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="alipay.mapper"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 数据库表 tableName为数据表的名称，domainObjectName为实体的名字，建议按照驼峰命名法-->
+        <table  tableName="payment_order_details" domainObjectName="PaymentOrderDetails" ><!-- 表的信息 -->
+        </table>
+
+    </context>
+</generatorConfiguration>
