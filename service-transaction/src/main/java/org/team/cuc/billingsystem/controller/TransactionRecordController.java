@@ -1,5 +1,7 @@
 package org.team.cuc.billingsystem.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.team.cuc.billingsystem.bean.bo.RecordBo;
 import org.team.cuc.billingsystem.bean.vo.PageVO;
@@ -12,6 +14,7 @@ import java.util.List;
 /**
  * @author jssd
  */
+@Api(tags = {"交易流水"})
 @RestController
 @RequestMapping("/transactions")
 public class TransactionRecordController {
@@ -28,11 +31,13 @@ public class TransactionRecordController {
     }
 
     @PostMapping
+    @ApiOperation(value = "增加一条流水")
     public TransactionRecordPo saveRecord(@RequestBody @NotNull(message = "data is null") TransactionRecordPo recordPo) {
         return transactionRecordService.saveRecord(recordPo);
     }
 
     @PostMapping("/find")
+    @ApiOperation(value = "分页查询流水信息")
     public PageVO<TransactionRecordPo> find(@RequestBody @NotNull(message = "data is null") RecordBo recordBo) {
         return transactionRecordService.find(recordBo);
     }

@@ -1,2 +1,12 @@
 ### 查询所有用户信息
 GET http://localhost:8080/users
+
+
+### 分页查询流水信息
+POST http://localhost:8081/transactions/find
+Content-Type: application/json
+
+{
+  "pageSize": 2,
+  "pageNum": 2
+}
