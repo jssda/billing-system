@@ -1,18 +1,20 @@
 package orderService.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import orderService.annotation.Log;
 import orderService.bean.Order;
 import orderService.constant.OrderConstant;
 import orderService.dto.DataReceiveOrder;
+import orderService.dto.OrderRequest;
 import orderService.service.OrderService;
 import orderService.util.DateUtil;
+import orderService.util.LogUtil;
 import orderService.util.ModesReturn;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -23,18 +25,19 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/orderService")
+@Api(tags= {"订单接口"})
 @Slf4j
 public class OrderController {
     @Autowired
     OrderService orderService;
 
     @PostMapping("/dataReceive")
-    public ModesReturn  receiveOrder(@RequestBody DataReceiveOrder dataReceiveOrder){
-        log.info("接受订单"+dataReceiveOrder);
+    @Log(name = "订单接收")
+    public ModesReturn receiveOrder(@RequestBody DataReceiveOrder dataReceiveOrder) {
         try {
             orderService.receiveOrder(dataReceiveOrder);
-        }catch (Exception e){
-            log.error(e.getMessage());
+        } catch (Exception e) {
+            log.error(LogUtil.errorMarker(),"订单接收异常",e);
         }
 
         ModesReturn modesReturn = new ModesReturn();
@@ -43,4 +46,12 @@ public class OrderController {
 
         return modesReturn;
     }
+    @Log(name = "获取分页数据")
+    @PostMapping("/conditionsPage")
+    @ApiOperation(value = "根据条件获取订单分页数据",notes = "获取分页数据")
+    public ModesReturn conditionsPage(@RequestBody OrderRequest orderRequest, @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
+        return orderService.conditionsPage(orderRequest, offset, limit);
+
+    }
 }
+

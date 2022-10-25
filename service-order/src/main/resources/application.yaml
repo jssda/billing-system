@@ -27,14 +27,9 @@ eureka:
 
 
 
-logging.level.com.debug.steadyjack: debug
-logging.level.org.mybatis.spring: debug
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-logging:
-  file:
-    path: ./logs
-    name: orderService.log
+
