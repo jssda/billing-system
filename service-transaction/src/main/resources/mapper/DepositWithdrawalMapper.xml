@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.team.cuc.billingsystem.mapper.DepositWithdrawalMapper">
+
+    <resultMap id="BaseResultMap" type="DepositWithdrawalPo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="optTime" column="opt_time" jdbcType="TIMESTAMP"/>
+        <result property="amount" column="amount" jdbcType="DOUBLE"/>
+        <result property="verifyTime" column="verify_time" jdbcType="TIMESTAMP"/>
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="opt" column="opt" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,code,opt_time,
+        amount,verify_time,account,
+        type,status,opt,
+        create_time
+    </sql>
+    <insert id="insertDepositWithdrawal" parameterType="DepositWithdrawalPo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_deposit_withdrawal(`code`, opt_time, type, amount, verify_time, `account`, `mode`, `status`, opt,
+                                         create_time)
+        values (#{code}, #{optTime}, #{type}, #{amount}, #{verifyTime}, #{account}, #{mode}, #{status}, #{opt},
+                #{createTime})
+
+    </insert>
+    <select id="selectByConditionPage"
+            resultType="org.team.cuc.billingsystem.po.transaction.DepositWithdrawalPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_deposit_withdrawal
+        <where>
+            <if test="id != null">
+                And id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="code != null">
+                And code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null">
+                And type = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test="account != null">
+                And account = #{account,jdbcType=VARCHAR}
+            </if>
+            <if test="mode != null">
+                And mode = #{mode,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                And status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="amount != null">
+                And amount = #{amount,jdbcType=DOUBLE}
+            </if>
+            <if test="startTime != null">AND opt_time <![CDATA[>=]]> #{startTime}</if>
+            <if test="endTime != null">AND opt_time <![CDATA[<=]]>#{endTime}</if>
+        </where>
+        <if test="pageSize != null and pageNum != null">
+            limit #{offset}, #{pageSize}
+        </if>
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select
+        count(1)
+        from
+        (
+        select
+        <include refid="Base_Column_List"/>
+        from t_deposit_withdrawal
+        <where>
+            <if test="id != null">
+                And id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="code != null">
+                And code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null">
+                And type = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test="account != null">
+                And account = #{account,jdbcType=VARCHAR}
+            </if>
+            <if test="mode != null">
+                And mode = #{mode,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                And status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="amount != null">
+                And amount = #{amount,jdbcType=DOUBLE}
+            </if>
+            <if test="startTime != null">AND opt_time <![CDATA[>=]]> #{startTime}</if>
+            <if test="endTime != null">AND opt_time <![CDATA[<=]]>#{endTime}</if>
+        </where>
+        ) t1
+    </select>
+</mapper>

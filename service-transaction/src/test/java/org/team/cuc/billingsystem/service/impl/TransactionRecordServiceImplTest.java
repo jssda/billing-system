@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
-import org.team.cuc.billingsystem.ServiceRecordApplication;
+import org.team.cuc.billingsystem.ServiceTransactionApplication;
 import org.team.cuc.billingsystem.bean.bo.RecordBo;
 import org.team.cuc.billingsystem.bean.vo.PageVO;
 import org.team.cuc.billingsystem.po.transaction.TransactionRecordPo;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Transactional
-@SpringBootTest(classes = ServiceRecordApplication.class)
+@SpringBootTest(classes = ServiceTransactionApplication.class)
 class TransactionRecordServiceImplTest {
 
     @Resource

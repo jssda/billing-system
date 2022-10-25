@@ -39,9 +39,10 @@ public interface TransactionRecordMapper {
     /**
      * 查询全部数据条数
      *
+     * @param recordBo 条件查询信息
      * @return 返回查询到的数据条数
      */
-    int count();
+    int count(RecordBo recordBo);
 }
 
 
