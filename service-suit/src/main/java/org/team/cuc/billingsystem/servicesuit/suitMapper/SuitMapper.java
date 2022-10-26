@@ -40,4 +40,12 @@ public interface SuitMapper {
      * @return 套装信息
      */
     SuitPo selectSuitById(Integer id);
+
+    /**
+     * 查询套装信息
+     *
+     * @param id 套装id
+     * @return 套装信息
+     */
+    List<SuitPo> selectSuit(SuitPo suitPo);
 }

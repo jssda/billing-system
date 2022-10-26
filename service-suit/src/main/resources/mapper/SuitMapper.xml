@@ -15,12 +15,12 @@
 
     <sql id="Base_Column_List">
         id
-        ,name,suitType,
-        costType,price,status
+        ,name,suit_type,
+        cost_type,price,status,create_uid,icon
     </sql>
     <insert id="saveOne" parameterType="SuitPo" useGeneratedKeys="true" keyProperty="id">
         insert into t_suit(<include refid="Base_Column_List"/>)
-        values(null, #{name}, #{suitType}, #{costType}, #{price}, #{status})
+        values(null, #{name}, #{suitType}, #{costType}, #{price}, #{status},#{createUid},#{icon})
     </insert>
     <select id="selectAllSuits" resultType="org.team.cuc.billingsystem.po.suitservice.SuitPo">
         select
@@ -34,16 +34,22 @@
                 name = #{name},
             </if>
             <if test="suitType != null">
-                suitType = #{suitType},
+                suit_type = #{suitType},
             </if>
             <if test="costType != null">
-                costType = #{costType},
+                cost_type = #{costType},
             </if>
             <if test="price != null">
                 price = #{price},
             </if>
             <if test="status != null">
                 status = #{status},
+            </if>
+            <if test="createUid != null">
+                create_uid = #{createUid},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
             </if>
         </set>
         where id = #{id}
@@ -53,5 +59,37 @@
         <include refid="Base_Column_List"/>
         from t_suit
         where id = #{id}
+    </select>
+    <select id="selectSuit" parameterType="SuitPo" resultType="org.team.cuc.billingsystem.po.suitservice.SuitPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_suit
+        <where>
+            1 = 1
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="suitType != null">
+                and suit_type = #{suitType}
+            </if>
+            <if test="costType != null">
+                and cost_type = #{costType}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="createUid != null">
+                and create_uid = #{createUid}
+            </if>
+            <if test="icon != null">
+                and icon = #{icon}
+            </if>
+        </where>
     </select>
 </mapper>

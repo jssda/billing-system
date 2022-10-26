@@ -31,14 +31,21 @@ public class SuitPo implements Serializable {
      */
     private Integer costType;
     /**
-     *
+     * 价格
      */
     private Double price;
     /**
-     *
+     * 套餐状态
      */
     private Integer status;
-
+    /**
+     * 创建者uid
+     */
+    private Integer createUid;
+    /**
+     * icon
+     */
+    private String icon;
 
     @Override
     public boolean equals(Object that) {
@@ -57,7 +64,9 @@ public class SuitPo implements Serializable {
                 && (this.getCostType() == null ? other.getCostType() == null : this.getCostType().equals(other.getCostType()))
                 && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
                 && (this.getSuitType() == null ? other.getSuitType() == null : this.getSuitType().equals(other.getSuitType()))
-                && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()));
+                && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+                && (this.getCreateUid() == null ? other.getCreateUid() == null : this.getCreateUid().equals(other.getCreateUid()))
+                && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()));
     }
 
     @Override
@@ -70,6 +79,8 @@ public class SuitPo implements Serializable {
         result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
         result = prime * result + ((getSuitType() == null) ? 0 : getSuitType().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getCreateUid() == null) ? 0 : getCreateUid().hashCode());
+        result = prime * result + ((getIcon() == null) ? 0 : getIcon().hashCode());
         return result;
     }
 
@@ -85,6 +96,8 @@ public class SuitPo implements Serializable {
         sb.append(", suitType=").append(suitType);
         sb.append(", price=").append(price);
         sb.append(", status=").append(status);
+        sb.append(", createUid=").append(createUid);
+        sb.append(", icon=").append(icon);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
