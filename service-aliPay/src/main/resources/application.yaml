@@ -20,7 +20,7 @@ eureka:
     # 是否当作客户端注册到服务端, 默认为true
     register-with-eureka: true
     # 是否从Eureka获取注册信息
-    fetch-registry: false
+    fetch-registry: true
     serviceUrl:
       # 设置与Eureka Server交互的地址, 多个地址可使用','分隔。
       defaultZone: http://123.57.39.124:8761/eureka/
