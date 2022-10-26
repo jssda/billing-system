@@ -1,11 +1,8 @@
 package org.team.cuc.billingsystem.utils;
 
 import cn.hutool.crypto.SecureUtil;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.team.cuc.billingsystem.po.suitservice.ToolPo;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -21,7 +18,7 @@ public class ApaasUtil {
 
     public static final String TOOL_LIST_URL = "http://apaas-api.apaas.cuc.edu.cn/toolOpen/tool/getAllToolList";
 
-    public static <T extends Object> ResponseEntity send(String url, String body, Class<T> convert) {
+    public static <T> ResponseEntity<T> send(String url, String body, Class<T> convert) {
         long now = System.currentTimeMillis() / 1000;
         int sha1PRNG = 0;
         try {

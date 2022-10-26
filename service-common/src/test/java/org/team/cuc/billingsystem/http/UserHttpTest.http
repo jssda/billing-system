@@ -1,0 +1,2 @@
+### 获取用户信息
+GET http://localhost:8080/users/token/6558C5E1AABB4052AE42D3513A48C2B9
