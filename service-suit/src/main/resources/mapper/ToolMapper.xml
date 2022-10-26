@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.team.cuc.billingsystem.servicesuit.suitMapper.ToolMapper">
+
+    <resultMap id="BaseResultMap" type="org.team.cuc.billingsystem.po.suitservice.ToolPo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="subType" column="sub_type" jdbcType="VARCHAR"/>
+        <result property="coverAddr" column="cover_addr" jdbcType="VARCHAR"/>
+        <result property="classifyId" column="classify_id" jdbcType="INTEGER"/>
+        <result property="remarksTitle" column="remarks_title" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="DOUBLE"/>
+        <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="open" column="open" jdbcType="INTEGER"/>
+        <result property="openAccess" column="open_access" jdbcType="INTEGER"/>
+        <result property="frame" column="frame" jdbcType="INTEGER"/>
+        <result property="systemType" column="system_type" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="authStatus" column="auth_status" jdbcType="VARCHAR"/>
+        <result property="hide" column="hide" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="BIGINT"/>
+        <result property="upTime" column="up_time" jdbcType="BIGINT"/>
+        <result property="toolUrl" column="tool_url" jdbcType="VARCHAR"/>
+        <result property="toolApi" column="tool_api" jdbcType="VARCHAR"/>
+        <result property="accessId" column="access_id" jdbcType="VARCHAR"/>
+        <result property="accessKey" column="access_key" jdbcType="VARCHAR"/>
+        <result property="toolAccessid" column="tool_accessid" jdbcType="VARCHAR"/>
+        <result property="toolAccesskey" column="tool_accesskey" jdbcType="VARCHAR"/>
+        <result property="parentUin" column="parent_uin" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="backInfo" column="back_info" jdbcType="VARCHAR"/>
+        <result property="priv" column="private" jdbcType="INTEGER"/>
+        <result property="button" column="button" jdbcType="VARCHAR"/>
+        <result property="inputNum" column="input_num" jdbcType="VARCHAR"/>
+        <result property="outputNum" column="output_num" jdbcType="VARCHAR"/>
+        <result property="costType" column="cost_type" jdbcType="INTEGER"/>
+        <result property="spceMoney" column="spce_money" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,title,sub_type,
+        cover_addr,classify_id,remarks_title,
+        price,remarks,type,
+        open,open_access,frame,
+        system_type,status,auth_status,
+        hide,create_time,up_time,
+        tool_url,tool_api,access_id,
+        access_key,tool_accessid,tool_accesskey,
+        parent_uin,user_id,back_info,
+        private,button,input_num,
+        output_num,cost_type,spce_money
+    </sql>
+
+    <select id="selectAllTools" resultType="org.team.cuc.billingsystem.po.suitservice.ToolPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_tool;
+    </select>
+
+    <insert id="saveOne" parameterType="toolPo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_tool(<include refid="Base_Column_List"/>)
+        values(#{id}, #{title}, #{subType}, #{coverAddr}, #{classifyId},
+        #{remarksTitle},#{price},#{remarks},#{type},#{open},#{openAccess},#{frame},#{systemType},#{status},#{authStatus},#{hide},#{createTime},#{upTime},#{toolUrl},#{toolApi},#{accessId},#{accessKey},#{toolAccessid},#{toolAccesskey},#{parentUin},#{userId},#{backInfo},#{priv},#{button},#{inputNum},#{outputNum},#{costType},#{spceMoney})
+    </insert>
+
+
+    <update id="updateById" parameterType="toolPo">
+        update t_tool
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="subType != null">
+                sub_type = #{subType},
+            </if>
+            <if test="classifyId != null">
+                classify_id = #{classifyId},
+            </if>
+            <if test="remarksTitle != null">
+                remarks_title = #{remarksTitle},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks},
+            </if>
+            <if test="open != null">
+                open = #{open},
+            </if>
+            <if test="openAccess != null">
+                open_access = #{openAccess},
+            </if>
+            <if test="frame != null">
+                frame = #{frame},
+            </if>
+            <if test="systemType != null">
+                system_type = #{systemType},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="authStatus != null">
+                auth_status = #{authStatus},
+            </if>
+            <if test="hide != null">
+                hide = #{hide},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="upTime != null">
+                up_time = #{upTime},
+            </if>
+            <if test="toolUrl != null">
+                tool_url = #{toolUrl},
+            </if>
+            <if test="toolApi != null">
+                tool_api = #{toolApi},
+            </if>
+            <if test="accessId != null">
+                access_id = #{accessId},
+            </if>
+            <if test="accessKey != null">
+                access_key = #{accessKey},
+            </if>
+            <if test="toolAccessid != null">
+                tool_accessid = #{toolAccessid},
+            </if>
+            <if test="toolAccesskey != null">
+                tool_accesskey = #{toolAccesskey},
+            </if>
+            <if test="parentUin != null">
+                parent_uin = #{parentUin},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="backInfo != null">
+                back_info = #{backInfo},
+            </if>
+            <if test="priv != null">
+                private = #{priv},
+            </if>
+            <if test="button != null">
+                button = #{button},
+            </if>
+            <if test="inputNum != null">
+                input_num = #{inputNum},
+            </if>
+            <if test="outputNum != null">
+                output_num = #{outputNum},
+            </if>
+            <if test="costType != null">
+                cost_type = #{costType},
+            </if>
+            <if test="spceMoney != null">
+                spce_money = #{spceMoney},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <select id="selectToolByIds" parameterType="Integer" resultType="org.team.cuc.billingsystem.po.suitservice.ToolPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_tool
+        where id in
+        <foreach  item="item" collection="list" index="index"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectTool" parameterType="org.team.cuc.billingsystem.servicesuit.bean.bo.ToolBo"
+            resultType="org.team.cuc.billingsystem.po.suitservice.ToolPo">
+        select
+        <include refid="Base_Column_List"/>
+        from t_tool
+        <where>
+            1 = 1
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="title != null">
+                AND title = #{title}
+            </if>
+            <if test="subType != null">
+                AND sub_type = #{subType}
+            </if>
+            <if test="classifyId != null">
+                AND classify_id = #{classifyId}
+            </if>
+            <if test="remarksTitle != null">
+                AND remarks_title = #{remarksTitle}
+            </if>
+            <if test="price != null">
+                AND price = #{price}
+            </if>
+            <if test="remarks != null">
+                AND remarks = #{remarks}
+            </if>
+            <if test="open != null">
+                AND open = #{open}
+            </if>
+            <if test="openAccess != null">
+                AND open_access = #{openAccess}
+            </if>
+            <if test="frame != null">
+                AND frame = #{frame}
+            </if>
+            <if test="systemType != null">
+                AND system_type = #{systemType}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="authStatus != null">
+                AND auth_status = #{authStatus}
+            </if>
+            <if test="hide != null">
+                AND hide = #{hide}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime}
+            </if>
+            <if test="upTime != null">
+                AND up_time = #{upTime}
+            </if>
+            <if test="toolUrl != null">
+                AND tool_url = #{toolUrl}
+            </if>
+            <if test="toolApi != null">
+                AND tool_api = #{toolApi}
+            </if>
+            <if test="accessId != null">
+                AND access_id = #{accessId}
+            </if>
+            <if test="accessKey != null">
+                AND access_key = #{accessKey}
+            </if>
+            <if test="toolAccessid != null">
+                AND tool_accessid = #{toolAccessid}
+            </if>
+            <if test="toolAccesskey != null">
+                AND tool_accesskey = #{toolAccesskey}
+            </if>
+            <if test="parentUin != null">
+                AND parent_uin = #{parentUin}
+            </if>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="backInfo != null">
+                AND back_info = #{backInfo}
+            </if>
+            <if test="priv != null">
+                AND private = #{priv}
+            </if>
+            <if test="button != null">
+                AND button = #{button}
+            </if>
+            <if test="inputNum != null">
+                AND input_num = #{inputNum}
+            </if>
+            <if test="outputNum != null">
+                AND output_num = #{outputNum}
+            </if>
+            <if test="costType != null">
+                AND cost_type = #{costType}
+            </if>
+            <if test="spceMoney != null">
+                AND spce_money = #{spceMoney}
+            </if>
+        </where>
+        <if test="pageSize != null and pageNum != null">
+            limit #{offset}, #{pageSize}
+        </if>
+
+    </select>
+
+
+    <select id="count" resultType="java.lang.Integer">
+        select
+        count(1)
+        from
+        (
+        select
+        <include refid="Base_Column_List"/>
+        from t_tool
+        <where>
+            1 = 1
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="title != null">
+                AND title = #{title}
+            </if>
+            <if test="subType != null">
+                AND sub_type = #{subType}
+            </if>
+            <if test="classifyId != null">
+                AND classify_id = #{classifyId}
+            </if>
+            <if test="remarksTitle != null">
+                AND remarks_title = #{remarksTitle}
+            </if>
+            <if test="price != null">
+                AND price = #{price}
+            </if>
+            <if test="remarks != null">
+                AND remarks = #{remarks}
+            </if>
+            <if test="open != null">
+                AND open = #{open}
+            </if>
+            <if test="openAccess != null">
+                AND open_access = #{openAccess}
+            </if>
+            <if test="frame != null">
+                AND frame = #{frame}
+            </if>
+            <if test="systemType != null">
+                AND system_type = #{systemType}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="authStatus != null">
+                AND auth_status = #{authStatus}
+            </if>
+            <if test="hide != null">
+                AND hide = #{hide}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime}
+            </if>
+            <if test="upTime != null">
+                AND up_time = #{upTime}
+            </if>
+            <if test="toolUrl != null">
+                AND tool_url = #{toolUrl}
+            </if>
+            <if test="toolApi != null">
+                AND tool_api = #{toolApi}
+            </if>
+            <if test="accessId != null">
+                AND access_id = #{accessId}
+            </if>
+            <if test="accessKey != null">
+                AND access_key = #{accessKey}
+            </if>
+            <if test="toolAccessid != null">
+                AND tool_accessid = #{toolAccessid}
+            </if>
+            <if test="toolAccesskey != null">
+                AND tool_accesskey = #{toolAccesskey}
+            </if>
+            <if test="parentUin != null">
+                AND parent_uin = #{parentUin}
+            </if>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="backInfo != null">
+                AND back_info = #{backInfo}
+            </if>
+            <if test="priv != null">
+                AND private = #{priv}
+            </if>
+            <if test="button != null">
+                AND button = #{button}
+            </if>
+            <if test="inputNum != null">
+                AND input_num = #{inputNum}
+            </if>
+            <if test="outputNum != null">
+                AND output_num = #{outputNum}
+            </if>
+            <if test="costType != null">
+                AND cost_type = #{costType}
+            </if>
+            <if test="spceMoney != null">
+                AND spce_money = #{spceMoney}
+            </if>
+        </where>
+        ) t1
+    </select>
+
+
+</mapper>

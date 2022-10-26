@@ -41,7 +41,7 @@ public class TransactionRecordServiceImpl implements TransactionRecordService {
     @Override
     public PageVO<TransactionRecordPo> find(RecordBo recordBo) {
         List<TransactionRecordPo> list = transactionRecordMapper.selectByConditionPage(recordBo);
-        int count = transactionRecordMapper.count();
+        int count = transactionRecordMapper.count(recordBo);
         return new PageVO<>(recordBo.getPageSize(), recordBo.getPageNum(), count, list);
     }
 }

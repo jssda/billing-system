@@ -33,3 +33,19 @@ create table t_transaction_record
 
 
 # 提现状态表
+create table t_deposit_withdrawal
+(
+    id          int auto_increment
+        primary key,
+    code        varchar(64) not null comment '充值/提现单号',
+    opt_time    timestamp   null comment '充值/提现时间',
+    type        varchar(64) null comment '类型',
+    amount      double      null comment '交易金额',
+    verify_time timestamp   null comment '到帐时间',
+    account     varchar(64) null comment '充值帐号',
+    mode        varchar(64) null comment '交易方式',
+    status      varchar(64) null comment '交易状态',
+    opt         varchar(64) null comment '状态',
+    create_time timestamp   null comment '时间'
+)
+    comment '充值/提现状态表';

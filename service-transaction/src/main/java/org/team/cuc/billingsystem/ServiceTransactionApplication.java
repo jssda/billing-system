@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author root
  */
 @SpringBootApplication
-public class ServiceRecordApplication {
+public class ServiceTransactionApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ServiceRecordApplication.class, args);
+        SpringApplication.run(ServiceTransactionApplication.class, args);
     }
 
 }
