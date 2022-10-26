@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.team.cuc.billingsystem.bo.JsonRootBean;
 import org.team.cuc.billingsystem.mapper.UserMapper;
 import org.team.cuc.billingsystem.po.userservice.UserPo;
 import org.team.cuc.billingsystem.service.UserService;
@@ -68,7 +67,7 @@ public class UserServiceImpl implements UserService {
         // 组装请求信息
         HttpEntity<String> httpEntity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<JsonRootBean> response = restTemplate.exchange("http://apaas-api.apaas.cuc.edu.cn/console/account/checkToolAccess", HttpMethod.POST, httpEntity, JsonRootBean.class);
+        ResponseEntity<String> response = restTemplate.exchange("http://apaas-api.apaas.cuc.edu.cn/console/account/checkToolAccess", HttpMethod.POST, httpEntity, String.class);
         log.info(String.valueOf(response));
 
         String userCode = "";
