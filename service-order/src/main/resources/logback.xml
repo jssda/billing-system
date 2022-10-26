@@ -78,6 +78,10 @@
     <logger name="org.apache.http.wire" level="INFO"/>
     <logger name="com.netflix.discovery.DiscoveryClient" level="INFO"/>
     <logger name=" org.apache.http.client.protocol" level="ERROR"/>
+
+    <logger name="org.apache" level="WARN" />
+    <logger name="httpclient" level="WARN" />
+    <logger name="org.springframework.web.HttpLogging" level="WARN" />
     <root>
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
