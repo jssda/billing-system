@@ -47,6 +47,21 @@ public interface UserMapper {
      * @return 返回查询到的用户信息， 如果没有查询到  返回null
      */
     UserPo selectUserById(@Param("id") int id);
+
+    /**
+     * 更新用户信息
+     *
+     * @param userPo 更新用户的实体
+     */
+    void update(UserPo userPo);
+
+    /**
+     * 添加一个用户信息
+     *
+     * @param userPo 用户实体
+     * @return 返回id
+     */
+    int insertUser(UserPo userPo);
 }
 
 

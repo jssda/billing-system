@@ -1,7 +1,7 @@
 /**
  * Copyright 2022 json.cn
  */
-package org.team.cuc.billingsystem.bo;
+package org.team.cuc.billingsystem.bean.bo;
 
 /**
  * Auto-generated: 2022-10-26 21:32:29

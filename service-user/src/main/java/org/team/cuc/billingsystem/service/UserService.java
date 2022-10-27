@@ -1,6 +1,7 @@
 package org.team.cuc.billingsystem.service;
 
 
+import org.team.cuc.billingsystem.bean.dto.UserAmountDto;
 import org.team.cuc.billingsystem.po.userservice.UserPo;
 
 import java.util.List;
@@ -34,4 +35,36 @@ public interface UserService {
      * @return 返回查询到的用户信息
      */
     UserPo getUserById(Integer id);
+
+    /**
+     * 更新用户信息
+     *
+     * @param userPo 用户实体
+     * @return 返回更新后的用户对象
+     */
+    UserPo updateUserById(UserPo userPo);
+
+    /**
+     * 获取用户余额
+     *
+     * @param userId 用户id
+     * @return 数据传输对象
+     */
+    UserAmountDto getUserAmountDto(Integer userId);
+
+    /**
+     * 更改用户余额接口
+     *
+     * @param userAmountDto 用户余额传输对象
+     */
+    void updateAmount(UserAmountDto userAmountDto);
+
+    /**
+     * 添加一个用户信息
+     *
+     * @param userPo 用户实体
+     * @return 返回添加后的用户信息
+     */
+    UserPo saveUser(UserPo userPo);
+
 }

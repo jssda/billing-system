@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.team.cuc.billingsystem.bean.dto.UserAmountDto;
 import org.team.cuc.billingsystem.mapper.UserMapper;
 import org.team.cuc.billingsystem.po.userservice.UserPo;
 import org.team.cuc.billingsystem.service.UserService;
@@ -85,6 +86,37 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserPo getUserById(Integer id) {
         return userMapper.selectUserById(id);
+    }
+
+    @Override
+    public UserPo updateUserById(UserPo userPo) {
+        userMapper.update(userPo);
+        return userPo;
+    }
+
+    @Override
+    public UserPo saveUser(UserPo userPo) {
+        userPo.setCreateTime(DateUtil.date());
+        int id = userMapper.insertUser(userPo);
+        userPo.setId(id);
+        return userPo;
+    }
+
+    @Override
+    public UserAmountDto getUserAmountDto(Integer userId) {
+        UserPo userById = getUserById(userId);
+        UserAmountDto userAmountDto = new UserAmountDto();
+        userAmountDto.setUserId(userId);
+        userAmountDto.setAmount(userById.getBalance());
+        return userAmountDto;
+    }
+
+    @Override
+    public void updateAmount(UserAmountDto userAmountDto) {
+        UserPo userPo = new UserPo();
+        userPo.setId(userAmountDto.getUserId());
+        userPo.setBalance(userAmountDto.getAmount());
+        updateUserById(userPo);
     }
 }
 

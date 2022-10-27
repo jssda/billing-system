@@ -1,4 +1,4 @@
-package org.team.cuc.billingsystem.bo;
+package org.team.cuc.billingsystem.bean.bo;
 
 /**
  * @author root
