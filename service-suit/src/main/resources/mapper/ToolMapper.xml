@@ -32,12 +32,15 @@
         <result property="parentUin" column="parent_uin" jdbcType="INTEGER"/>
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="backInfo" column="back_info" jdbcType="VARCHAR"/>
-        <result property="priv" column="private" jdbcType="INTEGER"/>
+        <result property="priv" column="priv" jdbcType="INTEGER"/>
         <result property="button" column="button" jdbcType="VARCHAR"/>
         <result property="inputNum" column="input_num" jdbcType="VARCHAR"/>
         <result property="outputNum" column="output_num" jdbcType="VARCHAR"/>
         <result property="costType" column="cost_type" jdbcType="INTEGER"/>
         <result property="spceMoney" column="spce_money" jdbcType="VARCHAR"/>
+        <result property="cost" column="cost" jdbcType="DOUBLE"/>
+        <result property="sell" column="sell" jdbcType="DOUBLE"/>
+        <result property="userProfit" column="user_profit" jdbcType="DOUBLE"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -51,8 +54,8 @@
         tool_url,tool_api,access_id,
         access_key,tool_accessid,tool_accesskey,
         parent_uin,user_id,back_info,
-        private,button,input_num,
-        output_num,cost_type,spce_money
+        priv,button,input_num,
+        output_num,cost_type,spce_money,cost,sell,user_profit
     </sql>
 
     <select id="selectAllTools" resultType="org.team.cuc.billingsystem.po.suitservice.ToolPo">
@@ -64,7 +67,7 @@
     <insert id="saveOne" parameterType="toolPo" useGeneratedKeys="true" keyProperty="id">
         insert into t_tool(<include refid="Base_Column_List"/>)
         values(#{id}, #{title}, #{subType}, #{coverAddr}, #{classifyId},
-        #{remarksTitle},#{price},#{remarks},#{type},#{open},#{openAccess},#{frame},#{systemType},#{status},#{authStatus},#{hide},#{createTime},#{upTime},#{toolUrl},#{toolApi},#{accessId},#{accessKey},#{toolAccessid},#{toolAccesskey},#{parentUin},#{userId},#{backInfo},#{priv},#{button},#{inputNum},#{outputNum},#{costType},#{spceMoney})
+        #{remarksTitle},#{price},#{remarks},#{type},#{open},#{openAccess},#{frame},#{systemType},#{status},#{authStatus},#{hide},#{createTime},#{upTime},#{toolUrl},#{toolApi},#{accessId},#{accessKey},#{toolAccessid},#{toolAccesskey},#{parentUin},#{userId},#{backInfo},#{priv},#{button},#{inputNum},#{outputNum},#{costType},#{spceMoney},#{cost},#{sell},#{userProfit})
     </insert>
 
 
@@ -144,7 +147,7 @@
                 back_info = #{backInfo},
             </if>
             <if test="priv != null">
-                private = #{priv},
+                priv = #{priv},
             </if>
             <if test="button != null">
                 button = #{button},
@@ -259,7 +262,7 @@
                 AND back_info = #{backInfo}
             </if>
             <if test="priv != null">
-                AND private = #{priv}
+                AND priv = #{priv}
             </if>
             <if test="button != null">
                 AND button = #{button}
@@ -275,6 +278,15 @@
             </if>
             <if test="spceMoney != null">
                 AND spce_money = #{spceMoney}
+            </if>
+            <if test="cost != null">
+                AND cost = #{cost}
+            </if>
+            <if test="sell != null">
+                AND sell = #{sell}
+            </if>
+            <if test="userProfit != null">
+                AND user_profit = #{userProfit}
             </if>
         </where>
         <if test="pageSize != null and pageNum != null">
@@ -370,7 +382,7 @@
                 AND back_info = #{backInfo}
             </if>
             <if test="priv != null">
-                AND private = #{priv}
+                AND priv = #{priv}
             </if>
             <if test="button != null">
                 AND button = #{button}
@@ -386,6 +398,15 @@
             </if>
             <if test="spceMoney != null">
                 AND spce_money = #{spceMoney}
+            </if>
+            <if test="cost != null">
+                AND cost = #{cost}
+            </if>
+            <if test="sell != null">
+                AND sell = #{sell}
+            </if>
+            <if test="userProfit != null">
+                AND user_profit = #{userProfit}
             </if>
         </where>
         ) t1

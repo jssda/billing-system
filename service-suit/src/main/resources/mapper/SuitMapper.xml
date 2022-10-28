@@ -11,12 +11,14 @@
         <result property="costType" column="costType" jdbcType="INTEGER"/>
         <result property="price" column="price" jdbcType="DOUBLE"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="toolList" column="tool_list" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id
         ,name,suit_type,
-        cost_type,price,status,create_uid,icon
+        cost_type,price,status,create_uid,icon,tool_list
     </sql>
     <insert id="saveOne" parameterType="SuitPo" useGeneratedKeys="true" keyProperty="id">
         insert into t_suit(<include refid="Base_Column_List"/>)
@@ -50,6 +52,9 @@
             </if>
             <if test="icon != null">
                 icon = #{icon},
+            </if>
+            <if test="toolList != null">
+                tool_list = #{toolList},
             </if>
         </set>
         where id = #{id}
@@ -89,6 +94,9 @@
             </if>
             <if test="icon != null">
                 and icon = #{icon}
+            </if>
+            <if test="toolList != null">
+                tool_list = #{toolList},
             </if>
         </where>
     </select>

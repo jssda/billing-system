@@ -175,6 +175,21 @@ public class ToolPo implements Serializable {
      */
     private String spceMoney;
 
+    /**
+     *
+     */
+    private Double cost;
+
+    /**
+     *
+     */
+    private Double sell;
+
+    /**
+     *
+     */
+    private Double userProfit;
+
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -221,7 +236,10 @@ public class ToolPo implements Serializable {
             && (this.getInputNum() == null ? other.getInputNum() == null : this.getInputNum().equals(other.getInputNum()))
             && (this.getOutputNum() == null ? other.getOutputNum() == null : this.getOutputNum().equals(other.getOutputNum()))
             && (this.getCostType() == null ? other.getCostType() == null : this.getCostType().equals(other.getCostType()))
-            && (this.getSpceMoney() == null ? other.getSpceMoney() == null : this.getSpceMoney().equals(other.getSpceMoney()));
+            && (this.getSpceMoney() == null ? other.getSpceMoney() == null : this.getSpceMoney().equals(other.getSpceMoney()))
+            && (this.getCost() == null ? other.getCost() == null : this.getCost().equals(other.getCost()))
+            && (this.getSell() == null ? other.getSell() == null : this.getSell().equals(other.getSell()))
+            && (this.getUserProfit() == null ? other.getUserProfit() == null : this.getUserProfit().equals(other.getUserProfit()));
     }
 
     @Override
@@ -261,6 +279,9 @@ public class ToolPo implements Serializable {
         result = prime * result + ((getOutputNum() == null) ? 0 : getOutputNum().hashCode());
         result = prime * result + ((getCostType() == null) ? 0 : getCostType().hashCode());
         result = prime * result + ((getSpceMoney() == null) ? 0 : getSpceMoney().hashCode());
+        result = prime * result + ((getCost() == null) ? 0 : getCost().hashCode());
+        result = prime * result + ((getSell() == null) ? 0 : getSell().hashCode());
+        result = prime * result + ((getUserProfit() == null) ? 0 : getUserProfit().hashCode());
         return result;
     }
 
@@ -303,6 +324,9 @@ public class ToolPo implements Serializable {
         sb.append(", outputNum=").append(outputNum);
         sb.append(", costType=").append(costType);
         sb.append(", spceMoney=").append(spceMoney);
+        sb.append(", cost=").append(cost);
+        sb.append(", sell=").append(sell);
+        sb.append(", userProfit=").append(userProfit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

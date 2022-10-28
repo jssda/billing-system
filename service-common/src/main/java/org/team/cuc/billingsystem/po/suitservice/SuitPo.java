@@ -46,6 +46,10 @@ public class SuitPo implements Serializable {
      * icon
      */
     private String icon;
+    /**
+     * toolList
+     */
+    private String toolList;
 
     @Override
     public boolean equals(Object that) {
@@ -66,7 +70,8 @@ public class SuitPo implements Serializable {
                 && (this.getSuitType() == null ? other.getSuitType() == null : this.getSuitType().equals(other.getSuitType()))
                 && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
                 && (this.getCreateUid() == null ? other.getCreateUid() == null : this.getCreateUid().equals(other.getCreateUid()))
-                && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()));
+                && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
+                && (this.getToolList() == null ? other.getToolList() == null : this.getToolList().equals(other.getToolList()));
     }
 
     @Override
@@ -81,6 +86,7 @@ public class SuitPo implements Serializable {
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreateUid() == null) ? 0 : getCreateUid().hashCode());
         result = prime * result + ((getIcon() == null) ? 0 : getIcon().hashCode());
+        result = prime * result + ((getToolList() == null) ? 0 : getToolList().hashCode());
         return result;
     }
 
@@ -98,6 +104,7 @@ public class SuitPo implements Serializable {
         sb.append(", status=").append(status);
         sb.append(", createUid=").append(createUid);
         sb.append(", icon=").append(icon);
+        sb.append(", toolList=").append(toolList);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

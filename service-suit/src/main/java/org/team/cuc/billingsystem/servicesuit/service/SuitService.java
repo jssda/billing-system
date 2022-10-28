@@ -18,6 +18,10 @@ public class SuitService {
         return suitMapper.selectAllSuits();
     }
 
+    public SuitPo selectById(Integer id) {
+        return suitMapper.selectSuitById(id);
+    }
+
     public int insertSuit(SuitPo suitPo){
         return suitMapper.saveOne(suitPo);
     }

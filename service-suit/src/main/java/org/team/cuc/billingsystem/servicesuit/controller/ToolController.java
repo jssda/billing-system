@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.team.cuc.billingsystem.bean.bo.AjaxResponse;
+import org.team.cuc.billingsystem.servicesuit.bean.bo.SuitBo;
 import org.team.cuc.billingsystem.servicesuit.bean.bo.ToolBo;
 import org.team.cuc.billingsystem.servicesuit.service.ToolService;
 import org.team.cuc.billingsystem.servicesuit.suitMapper.SuitMapper;
@@ -44,5 +45,10 @@ public class ToolController {
     public String refreshTool2db() {
        toolService.refreshTool2db();
        return "success";
+    }
+
+    @RequestMapping("/listToolFromSuit")
+    public AjaxResponse listToolFromSuit( @NotNull(message = "data is null") SuitBo bo) {
+        return AjaxResponse.success(toolService.listToolsFromSuit(bo));
     }
 }
