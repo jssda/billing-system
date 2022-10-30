@@ -2,6 +2,10 @@ spring:
   application:
     name: service-suit
 
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   # 数据库信息
   datasource:
     url: jdbc:mysql://rm-bp1r47vvt63kan8tjso.mysql.rds.aliyuncs.com:3306/billing_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
@@ -12,9 +16,17 @@ server:
   port: 8012
 
 eureka:
+  instance:
+    #    hostname: localhost
+    hostname: 123.57.39.124
   client:
+    # 是否当作客户端注册到服务端, 默认为true
+    register-with-eureka: true
+    # 是否从Eureka获取注册信息
+    fetch-registry: true
     serviceUrl:
-      defaultZone: http://127.0.0.1:8011/eureka/
+      # 设置与Eureka Server交互的地址, 多个地址可使用','分隔。
+      defaultZone: http://123.57.39.124:8761/eureka/
 
 mybatis:
   type-aliases-package: org.team.cuc.billingsystem.po.suitservice
