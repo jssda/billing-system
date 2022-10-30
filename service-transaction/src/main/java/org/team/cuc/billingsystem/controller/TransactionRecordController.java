@@ -3,6 +3,7 @@ package org.team.cuc.billingsystem.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import org.team.cuc.billingsystem.bean.bo.AjaxResponse;
 import org.team.cuc.billingsystem.bean.bo.RecordBo;
 import org.team.cuc.billingsystem.bean.vo.PageVO;
 import org.team.cuc.billingsystem.po.transaction.TransactionRecordPo;
@@ -26,19 +27,19 @@ public class TransactionRecordController {
     }
 
     @GetMapping()
-    public List<TransactionRecordPo> listRecords() {
-        return transactionRecordService.listRecords();
+    public AjaxResponse<List<TransactionRecordPo>> listRecords() {
+        return AjaxResponse.success(transactionRecordService.listRecords());
     }
 
     @PostMapping
     @ApiOperation(value = "增加一条流水")
-    public TransactionRecordPo saveRecord(@RequestBody @NotNull(message = "data is null") TransactionRecordPo recordPo) {
-        return transactionRecordService.saveRecord(recordPo);
+    public AjaxResponse<TransactionRecordPo> saveRecord(@RequestBody @NotNull(message = "data is null") TransactionRecordPo recordPo) {
+        return AjaxResponse.success(transactionRecordService.saveRecord(recordPo));
     }
 
     @PostMapping("/find")
     @ApiOperation(value = "分页查询流水信息")
-    public PageVO<TransactionRecordPo> find(@RequestBody @NotNull(message = "data is null") RecordBo recordBo) {
-        return transactionRecordService.find(recordBo);
+    public AjaxResponse<PageVO<TransactionRecordPo>> find(@RequestBody @NotNull(message = "data is null") RecordBo recordBo) {
+        return AjaxResponse.success(transactionRecordService.find(recordBo));
     }
 }

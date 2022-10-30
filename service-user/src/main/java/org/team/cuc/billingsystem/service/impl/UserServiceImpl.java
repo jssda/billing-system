@@ -1,6 +1,7 @@
 package org.team.cuc.billingsystem.service.impl;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.team.cuc.billingsystem.bean.dto.UserAmountDto;
 import org.team.cuc.billingsystem.mapper.UserMapper;
 import org.team.cuc.billingsystem.po.userservice.UserPo;
 import org.team.cuc.billingsystem.service.UserService;
@@ -42,10 +44,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserPo getUserInfo(String token) {
-        String accessId = "accessId";
-        String accessKey = "accessKey";
-        double random = Math.random();
-        String signatureNonce = random + "";
+        String accessId = "645740746176";
+        String accessKey = "25mKPb50fzKjGdb0IiVAj9e5DGC368s0";
+        String signatureNonce = RandomUtil.randomString(6);
         String timeStamp = DateUtil.date().toTimestamp().toString();
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode objectNode = objectMapper.createObjectNode();
@@ -85,6 +86,37 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserPo getUserById(Integer id) {
         return userMapper.selectUserById(id);
+    }
+
+    @Override
+    public UserPo updateUserById(UserPo userPo) {
+        userMapper.update(userPo);
+        return userPo;
+    }
+
+    @Override
+    public UserPo saveUser(UserPo userPo) {
+        userPo.setCreateTime(DateUtil.date());
+        int id = userMapper.insertUser(userPo);
+        userPo.setId(id);
+        return userPo;
+    }
+
+    @Override
+    public UserAmountDto getUserAmountDto(Integer userId) {
+        UserPo userById = getUserById(userId);
+        UserAmountDto userAmountDto = new UserAmountDto();
+        userAmountDto.setUserId(userId);
+        userAmountDto.setAmount(userById.getBalance());
+        return userAmountDto;
+    }
+
+    @Override
+    public void updateAmount(UserAmountDto userAmountDto) {
+        UserPo userPo = new UserPo();
+        userPo.setId(userAmountDto.getUserId());
+        userPo.setBalance(userAmountDto.getAmount());
+        updateUserById(userPo);
     }
 }
 

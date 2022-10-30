@@ -2,11 +2,12 @@ spring:
   application:
     name: order-server
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://123.57.39.124:3306/billing_system
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: liuHao123.
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver   # mysql 驱动
+      url: jdbc:mysql://123.57.39.124:3306/billing_system  # 连接数据库
+      username: root    # 数据库账户
+      password: liuHao123.    # 数据库密码
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -26,10 +27,12 @@ eureka:
       defaultZone: http://123.57.39.124:8761/eureka/
 
 
-
+logging:
+  level:
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 

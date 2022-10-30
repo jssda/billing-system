@@ -5,8 +5,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import orderService.annotation.Log;
 import orderService.bean.Order;
+import orderService.bean.PaymentOrderDetails;
 import orderService.constant.OrderConstant;
 import orderService.dto.DataReceiveOrder;
+import orderService.dto.OrderPayRequest;
 import orderService.dto.OrderRequest;
 import orderService.service.OrderService;
 import orderService.util.DateUtil;
@@ -51,6 +53,29 @@ public class OrderController {
     @ApiOperation(value = "根据条件获取订单分页数据",notes = "获取分页数据")
     public ModesReturn conditionsPage(@RequestBody OrderRequest orderRequest, @RequestParam("offset") int offset, @RequestParam("limit") int limit) {
         return orderService.conditionsPage(orderRequest, offset, limit);
+
+    }
+
+    @Log(name = "获取待支付订单数量")
+    @GetMapping("/getNoPaymentOrder")
+    @ApiOperation(value = "获取待支付订单数量",notes = "获取待支付订单数量")
+    public ModesReturn getNoPaymentOrder(@RequestParam("userId")String userId) {
+        return orderService.getNoPaymentOrder(userId);
+
+    }
+
+    @Log(name = "订单支付")
+    @PostMapping("/orderPay")
+    @ApiOperation(value = "订单支付",notes = "订单支付")
+    public ModesReturn orderPay(@RequestBody OrderPayRequest orderPayRequest) {
+        return orderService.orderPay(orderPayRequest);
+
+    }
+
+    @Log(name = "订单支付回调接口")
+    @PostMapping("/notify")
+    public ModesReturn notify(@RequestBody PaymentOrderDetails paymentOrderDetails) {
+        return orderService.orderNotify(paymentOrderDetails);
 
     }
 }

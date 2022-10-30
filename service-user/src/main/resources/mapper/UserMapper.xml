@@ -34,6 +34,54 @@
         values(null, #{parentUin}, #{realName}, #{userName}, #{avatar}, #{email}, #{type}, #{userCode}, #{userId},
         #{subType}, #{company}, #{admin}, #{balance}, #{createTime})
     </insert>
+    <insert id="insertUser" parameterType="UserPo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user(parent_uin, real_name, user_name, avatar, email, `type`, user_code, user_id, sub_type,
+                           company,
+                           `admin`, balance, create_time)
+        VALUES (#{parentUin}, #{realName}, #{userName}, #{avatar}, #{email}, #{type}, #{userCode}, #{userId},
+                #{subType}, #{company}, #{admin}, #{balance}, #{createTime})
+    </insert>
+    <update id="update" parameterType="UserPo">
+        update t_user
+        <set>
+            <if test="parentUin != null">
+                parent_uin = #{parentUin},
+            </if>
+            <if test="realName != null">
+                real_name = #{realName},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="userCode != null">
+                user_code = #{userCode},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="subType != null">
+                sub_type = #{subType},
+            </if>
+            <if test="company != null">
+                company = #{company},
+            </if>
+            <if test="admin != null">
+                admin = #{admin},
+            </if>
+            <if test="balance != null">
+                balance = #{balance},
+            </if>
+        </set>
+    </update>
     <select id="selectAllUsers" resultType="org.team.cuc.billingsystem.po.userservice.UserPo">
         select
         <include refid="Base_Column_List"/>
@@ -52,4 +100,5 @@
         from t_user
         where id = #{id}
     </select>
+
 </mapper>

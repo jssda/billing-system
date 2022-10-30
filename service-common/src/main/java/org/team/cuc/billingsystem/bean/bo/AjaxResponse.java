@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author jssdjing@gmail.com
  */
 @Data
-public class AjaxResponse implements Serializable {
+public class AjaxResponse<T> implements Serializable {
 
     /**
      * 请求响应状态码
@@ -27,7 +27,7 @@ public class AjaxResponse implements Serializable {
     /**
      * 请求结果数据（通常用于查询操作）
      */
-    private Object data;
+    private T data;
 
     private AjaxResponse() {
     }
@@ -38,16 +38,16 @@ public class AjaxResponse implements Serializable {
      * @param e 异常信息
      * @return 返回响应
      */
-    public static AjaxResponse error(CustomException e) {
-        AjaxResponse resultBean = new AjaxResponse();
+    public static <T> AjaxResponse<T> error(CustomException e) {
+        AjaxResponse<T> resultBean = new AjaxResponse<T>();
         resultBean.setCode(e.getCode());
         resultBean.setMessage(e.getInfo());
         return resultBean;
     }
 
 
-    public static AjaxResponse error(ExceptionCode exceptionCode, String errorMessage, Object data) {
-        AjaxResponse resultBean = new AjaxResponse();
+    public static <T> AjaxResponse<T> error(ExceptionCode exceptionCode, String errorMessage, T data) {
+        AjaxResponse<T> resultBean = new AjaxResponse<T>();
         resultBean.setCode(exceptionCode.getCode());
         resultBean.setMessage(errorMessage);
         resultBean.setData(data);
@@ -57,8 +57,8 @@ public class AjaxResponse implements Serializable {
     /**
      * 请求出现异常时的响应数据封装
      */
-    public static AjaxResponse error(ExceptionCode exceptionCode, String errorMessage) {
-        AjaxResponse resultBean = new AjaxResponse();
+    public static <T> AjaxResponse<T> error(ExceptionCode exceptionCode, String errorMessage) {
+        AjaxResponse<T> resultBean = new AjaxResponse<T>();
         resultBean.setCode(exceptionCode.getCode());
         resultBean.setMessage(errorMessage);
         return resultBean;
@@ -67,8 +67,8 @@ public class AjaxResponse implements Serializable {
     /**
      * 请求成功的响应，不带查询数据（用于删除、修改、新增接口）
      */
-    public static AjaxResponse success() {
-        AjaxResponse ajaxResponse = new AjaxResponse();
+    public static <T> AjaxResponse<T> success() {
+        AjaxResponse<T> ajaxResponse = new AjaxResponse<T>();
         ajaxResponse.setCode(200);
         ajaxResponse.setMessage("请求响应成功!");
         return ajaxResponse;
@@ -77,8 +77,8 @@ public class AjaxResponse implements Serializable {
     /**
      * 请求成功的响应，带有查询数据（用于数据查询接口）
      */
-    public static AjaxResponse success(Object obj) {
-        AjaxResponse ajaxResponse = new AjaxResponse();
+    public static <T> AjaxResponse<T> success(T obj) {
+        AjaxResponse<T> ajaxResponse = new AjaxResponse<T>();
         ajaxResponse.setCode(200);
         ajaxResponse.setMessage("请求响应成功!");
         ajaxResponse.setData(obj);
@@ -88,8 +88,8 @@ public class AjaxResponse implements Serializable {
     /**
      * 请求成功的响应，带有查询数据（用于数据查询接口）
      */
-    public static AjaxResponse success(Object obj, String message) {
-        AjaxResponse ajaxResponse = new AjaxResponse();
+    public static <T> AjaxResponse<T> success(T obj, String message) {
+        AjaxResponse<T> ajaxResponse = new AjaxResponse<T>();
         ajaxResponse.setCode(200);
         ajaxResponse.setMessage(message);
         ajaxResponse.setData(obj);

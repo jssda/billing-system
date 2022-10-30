@@ -1,12 +1,37 @@
+
 ### 查询所有用户信息
 GET http://localhost:8080/users
 
+### 获取用户信息
+GET http://localhost:8080/users/token/6558C5E1AABB4052AE42D3513A48C2B9
 
-### 分页查询流水信息
-POST http://localhost:8081/transactions/find
+### 添加一个用户信息
+POST http://localhost:8080/users/saveOne
 Content-Type: application/json
 
 {
-  "pageSize": 2,
-  "pageNum": 2
+  "parentUin": 1,
+  "realName": "admin",
+  "userName": "admin",
+  "avatar": "1",
+  "email": "admin@emil",
+  "type": "1",
+  "userCode": "1",
+  "userId": "1",
+  "subType": "1",
+  "company": "1",
+  "admin": 1,
+  "balance": 1000.0
+}
+
+### 获取用户余额
+GET http://localhost:8080/users/getUserAmount?userId=2
+
+### 更改用户余额
+POST http://localhost:8080/users/updateAmount
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "amount": 1100.0
 }
