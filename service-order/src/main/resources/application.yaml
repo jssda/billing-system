@@ -4,9 +4,9 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver   # mysql 驱动
-      url: jdbc:mysql://123.57.39.124:3306/billing_system  # 连接数据库
+      url: jdbc:mysql://rm-bp1r47vvt63kan8tjso.mysql.rds.aliyuncs.com:3306/billing_system  # 连接数据库
       username: root    # 数据库账户
-      password: liuHao123.    # 数据库密码
+      password: Liuhao123456    # 数据库密码
 
   mvc:
     pathmatch:

@@ -1,12 +1,12 @@
 
 ### 查询所有用户信息
-GET http://localhost:8080/users
+GET http://{{host}}:8080/users
 
 ### 获取用户信息
-GET http://localhost:8080/users/token/6558C5E1AABB4052AE42D3513A48C2B9
+GET http://{{host}}:8080/users/token/6558C5E1AABB4052AE42D3513A48C2B9
 
 ### 添加一个用户信息
-POST http://localhost:8080/users/saveOne
+POST http://{{host}}:8080/users/saveOne
 Content-Type: application/json
 
 {
@@ -25,13 +25,10 @@ Content-Type: application/json
 }
 
 ### 获取用户余额
-GET http://localhost:8080/users/getUserAmount?userId=1
-
-### 获取用户余额-服务
-GET http://123.57.39.124:8080/users/getUserAmount?userId=2
+GET http://{{host}}:8080/users/getUserAmount?userId=2
 
 ### 更改用户余额
-POST http://localhost:8080/users/updateAmount
+POST http://{{host}}:8080/users/updateAmount
 Content-Type: application/json
 
 {
@@ -40,12 +37,6 @@ Content-Type: application/json
   "optType": 1
 }
 
-### 更改用户余额-service
-POST http://123.57.39.124:8080/users/updateAmount
-Content-Type: application/json
+### 通过id 查询用户
+GET http://{{host}}:8080/users/id/1
 
-{
-  "userId": 2,
-  "amount": 20.0,
-  "optType": 1
-}

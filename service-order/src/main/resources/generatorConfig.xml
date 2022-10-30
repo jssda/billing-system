@@ -14,9 +14,9 @@
 
         <!-- jdbcConnection 需要能连通，driverClass为数据库驱动的入口类 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://123.57.39.124:3306/billing_system"
+                        connectionURL="jdbc:mysql://rm-bp1r47vvt63kan8tjso.mysql.rds.aliyuncs.com:3306/billing_system"
                         userId="root"
-                        password="liuHao123.">
+                        password="Liuhao123456">
         </jdbcConnection>
 
         <javaTypeResolver >

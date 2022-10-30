@@ -3,10 +3,10 @@ spring:
     name: alipay-server
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://123.57.39.124:3306/billing_system
+    url: jdbc:mysql://rm-bp1r47vvt63kan8tjso.mysql.rds.aliyuncs.com:3306/billing_system
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: liuHao123.
+    password: Liuhao123456
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

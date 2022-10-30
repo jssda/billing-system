@@ -4,9 +4,9 @@ spring:
 
   # 数据库信息
   datasource:
-    url: jdbc:mysql://123.57.39.124:3306/billing_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    url: jdbc:mysql://rm-bp1r47vvt63kan8tjso.mysql.rds.aliyuncs.com:3306/billing_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
-    password: liuHao123.
+    password: Liuhao123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     pathmatch:
@@ -18,7 +18,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://123.57.39.124:8761/eureka/
-
+  instance:
+    hostname: 123.57.39.124
 mybatis:
   type-aliases-package: org.team.cuc.billingsystem.po.userservice
   mapper-locations: classpath:mapper/*Mapper.xml
