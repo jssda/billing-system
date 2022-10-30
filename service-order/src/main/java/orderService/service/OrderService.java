@@ -1,14 +1,14 @@
 package orderService.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import orderService.bean.Order;
 import orderService.bean.OrderExample;
 import orderService.bean.PaymentOrder;
 import orderService.bean.PaymentOrderDetails;
 import orderService.constant.OrderConstant;
-import orderService.dto.DataReceiveOrder;
-import orderService.dto.OrderPayRequest;
-import orderService.dto.OrderRequest;
+import orderService.dto.*;
 import orderService.mapper.OrderMapper;
 import orderService.util.BigDecimalUtil;
 import orderService.util.DateUtil;
@@ -21,7 +21,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.spring.web.json.Json;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -114,6 +116,14 @@ public class OrderService {
     }
 
     public ModesReturn orderPay(OrderPayRequest orderPayRequest) {
+        //检查余额是否充足
+        if (checkUserAccount(orderPayRequest)) {
+            ModesReturn modesReturn = new ModesReturn();
+            modesReturn.setData("");
+            modesReturn.setCode(OrderConstant.SUCCESS);
+            modesReturn.setMessage(OrderConstant.SUCCESS_MESSAGE);
+            return modesReturn;
+        }
         List<Order> orderList = new ArrayList<>();
 
         String payOrderId = DateUtil.getNewOrderId(orderPayRequest.getUserId());
@@ -149,7 +159,50 @@ public class OrderService {
     }
 
     /**
+     * 检查用户余额是否足以抵扣此次订单支付
+     *
+     * @param orderPayRequest
+     * @return
+     */
+    private boolean checkUserAccount(OrderPayRequest orderPayRequest) {
+        try {
+            String userId = orderPayRequest.getUserId();
+            String actualAmount = orderPayRequest.getActualAmount();
+            log.debug(LogUtil.marker("http://service-user/users/id/"+orderPayRequest.getUserId()), "获取的用户信息请求地址");
+            Object userObj = restTemplate.getForObject("http://service-user/users/id/" + orderPayRequest.getUserId(), Object.class);
+            log.debug(LogUtil.marker(userObj), "获取的用户信息");
+            JSONObject object = JSON.parseObject(JSON.toJSONString(userObj));
+            Object data = object.get("data");
+            UserPo user = JSON.parseObject(JSON.toJSONString(data), UserPo.class);
+            log.debug(LogUtil.marker(user), "用户信息");
+            if (user != null) {
+                log.debug(LogUtil.marker(user.getBalance() + ""), "用户余额");
+                log.debug(LogUtil.marker(actualAmount), "订单金额");
+                int compare = BigDecimalUtil.compare(user.getBalance() + "", actualAmount);
+                if (compare >= 0) {
+                    UserAmountDto userAmountDto = new UserAmountDto();
+                    userAmountDto.setUserId(Integer.parseInt(userId));
+                    userAmountDto.setAmount(new BigDecimal(actualAmount).doubleValue());
+                    userAmountDto.setOptType(1);
+                    log.debug(LogUtil.marker(userAmountDto), "扣减余额入参");
+                    Object response = restTemplate.postForObject("http://service-user/users/updateAmount", userAmountDto, Object.class);
+                    log.debug(LogUtil.marker(response), "扣减余额响应");
+                    return true;
+                }
+
+            }
+
+        }catch (Exception e){
+            log.debug(LogUtil.errorMarker(),"查询用户余额异常",e);
+        }
+        return false;
+
+
+    }
+
+    /**
      * 支付通知
+     *
      * @param paymentOrderDetails 通知入参
      * @return
      */
@@ -175,10 +228,11 @@ public class OrderService {
 
     /**
      * 分账
+     *
      * @param orderList 支付成功的订单
      */
     private void ledger(List<Order> orderList) {
-        log.debug(LogUtil.marker(orderList),"开始分账");
+        log.debug(LogUtil.marker(orderList), "开始分账");
 
     }
 }

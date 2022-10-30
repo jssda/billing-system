@@ -17,4 +17,10 @@ public class BigDecimalUtil {
         BigDecimal num1 = new BigDecimal(yuan);
         return num1.multiply(new BigDecimal(100)).intValue();
     }
+
+    public static int compare(String str1,String str2){
+        BigDecimal num1 = new BigDecimal(str1);
+        BigDecimal num2 = new BigDecimal(str2);
+        return num1.compareTo(num2);
+    }
 }
