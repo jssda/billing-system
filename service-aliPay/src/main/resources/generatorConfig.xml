@@ -30,7 +30,7 @@
         </javaModelGenerator>
 
         <!--  生成xml的配置-->
-        <sqlMapGenerator targetPackage="alipay.mapper"  targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
@@ -40,7 +40,7 @@
         </javaClientGenerator>
 
         <!-- 数据库表 tableName为数据表的名称，domainObjectName为实体的名字，建议按照驼峰命名法-->
-        <table  tableName="payment_order_details" domainObjectName="PaymentOrderDetails" ><!-- 表的信息 -->
+        <table  tableName="transform_order_details" domainObjectName="TransformOrderDetails" ><!-- 表的信息 -->
         </table>
 
     </context>

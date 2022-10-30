@@ -1,7 +1,9 @@
 package alipay.config;
 
 import alipay.constant.AliPayConstant;
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
+import com.alipay.api.CertAlipayRequest;
 import com.alipay.api.DefaultAlipayClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +19,20 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class AliConfig {
     @Bean
-    AlipayClient getAlipayClient(){
-        return   new DefaultAlipayClient(AliPayConstant.GATE_WAY,AliPayConstant.APP_ID,AliPayConstant.PRIVATE_KEY,"json","utf-8",AliPayConstant.ALI_PUBLIC_KEY,"RSA2");
+    AlipayClient getAlipayClient() throws AlipayApiException {
+        CertAlipayRequest alipayConfig = new CertAlipayRequest();
+        alipayConfig.setPrivateKey(AliPayConstant.PRIVATE_KEY);
+        alipayConfig.setServerUrl(AliPayConstant.GATE_WAY);
+        alipayConfig.setAppId(AliPayConstant.APP_ID);
+        alipayConfig.setCharset("utf-8");
+        alipayConfig.setSignType("RSA2");
+        alipayConfig.setEncryptor("");
+        alipayConfig.setFormat("json");
+        alipayConfig.setCertPath("/opt/appPublicCert.crt");
+        alipayConfig.setAlipayPublicCertPath("/opt/alipayPublicCert.crt");
+        alipayConfig.setRootCertPath("/opt/alipayRootCert.crt");
+        AlipayClient alipayClient = new DefaultAlipayClient(alipayConfig);
+        return  alipayClient;
     }
     @Bean("loadBalancedRestTemplate")
     @LoadBalanced

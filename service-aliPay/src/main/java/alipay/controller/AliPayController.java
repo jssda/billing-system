@@ -2,6 +2,7 @@ package alipay.controller;
 
 import alipay.bean.PaymentOrderDetails;
 import alipay.dto.PaymentOrder;
+import alipay.dto.TransformOrder;
 import alipay.service.AliPayService;
 import alipay.util.ModesReturn;
 import io.swagger.annotations.Api;
@@ -35,5 +36,11 @@ public class AliPayController {
        return aliPayService.pay(paymentOrder);
     }
 
+    @PostMapping("/transform")
+    @ApiOperation(value = "转账",notes = "转账")
+    public ModesReturn transform(@RequestBody TransformOrder transformOrder){
+        log.info("转账入参"+transformOrder);
+        return aliPayService.transform(transformOrder);
+    }
 
 }
