@@ -1,10 +1,9 @@
 package org.team.cuc.billingsystem.servicesuit.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.team.cuc.billingsystem.bean.bo.AjaxResponse;
 import org.team.cuc.billingsystem.servicesuit.bean.bo.SuitBo;
 import org.team.cuc.billingsystem.servicesuit.bean.bo.ToolBo;
@@ -19,6 +18,7 @@ import javax.validation.constraints.NotNull;
  * @Author: czq
  * @CreateTime: 2022-10-25 18:18
  */
+@Api(tags = {"组件"})
 @RestController
 public class ToolController {
     @Autowired
@@ -26,7 +26,7 @@ public class ToolController {
     @Autowired
     ToolService toolService;
 
-    @RequestMapping("/listTool")
+    @PostMapping("/listTool")
     public AjaxResponse listTool( @NotNull(message = "data is null") ToolBo bo) {
         return AjaxResponse.success(toolService.listTools(bo));
     }
@@ -47,7 +47,8 @@ public class ToolController {
        return "success";
     }
 
-    @RequestMapping("/listToolFromSuit")
+    @ApiOperation(value = "通过套餐列出所有组件")
+    @PostMapping("/listToolFromSuit")
     public AjaxResponse listToolFromSuit( @NotNull(message = "data is null") SuitBo bo) {
         return AjaxResponse.success(toolService.listToolsFromSuit(bo));
     }
