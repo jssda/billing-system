@@ -6,3 +6,13 @@ Content-Type: application/json
   "pageSize": 2,
   "pageNum": 2
 }
+
+
+### 分页查询流水信息-service
+POST http://123.57.39.124:8081/transactions/find
+Content-Type: application/json
+
+{
+  "pageSize": 2,
+  "pageNum": 2
+}

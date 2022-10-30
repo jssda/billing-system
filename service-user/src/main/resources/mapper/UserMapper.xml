@@ -81,6 +81,7 @@
                 balance = #{balance},
             </if>
         </set>
+        where id = #{id}
     </update>
     <select id="selectAllUsers" resultType="org.team.cuc.billingsystem.po.userservice.UserPo">
         select

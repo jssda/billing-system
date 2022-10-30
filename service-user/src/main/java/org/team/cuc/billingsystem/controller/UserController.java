@@ -47,14 +47,14 @@ public class UserController {
 
     @ApiOperation("获取用户余额")
     @GetMapping("/getUserAmount")
-    public AjaxResponse<UserAmountDto> getUserAmount(@NotNull Integer userId) {
+    public AjaxResponse<UserAmountDto> getUserAmount(@RequestParam(name = "userId") @NotNull Integer userId) {
         UserAmountDto userAmountDto = userService.getUserAmountDto(userId);
         return AjaxResponse.success(userAmountDto);
     }
 
     @ApiOperation("更改用户余额")
     @PostMapping("/updateAmount")
-    public AjaxResponse<Object> updateAmount(@RequestBody UserAmountDto userAmountDto) {
+    public AjaxResponse<Object> updateAmount(@RequestBody @NotNull UserAmountDto userAmountDto) {
         userService.updateAmount(userAmountDto);
         return AjaxResponse.success();
     }

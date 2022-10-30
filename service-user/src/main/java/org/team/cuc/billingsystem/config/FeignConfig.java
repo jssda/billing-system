@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @EnableDiscoveryClient
 @EnableEurekaClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "org.team.cuc.billingsystem.service")
 @SpringBootConfiguration
 public class FeignConfig {
 }

@@ -8,10 +8,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import org.team.cuc.billingsystem.bean.bo.AjaxResponse;
 import org.team.cuc.billingsystem.bean.dto.UserAmountDto;
+import org.team.cuc.billingsystem.exception.CustomException;
 import org.team.cuc.billingsystem.mapper.UserMapper;
+import org.team.cuc.billingsystem.po.transaction.TransactionRecordPo;
 import org.team.cuc.billingsystem.po.userservice.UserPo;
+import org.team.cuc.billingsystem.service.TransactionRecordService;
 import org.team.cuc.billingsystem.service.UserService;
 import org.team.cuc.billingsystem.utils.JsonUtil;
 
@@ -33,8 +38,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
-    public UserServiceImpl(UserMapper userMapper) {
+    private final TransactionRecordService recordService;
+
+    public UserServiceImpl(UserMapper userMapper, TransactionRecordService recordService) {
         this.userMapper = userMapper;
+        this.recordService = recordService;
     }
 
     @Override
@@ -112,11 +120,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateAmount(UserAmountDto userAmountDto) {
-        UserPo userPo = new UserPo();
-        userPo.setId(userAmountDto.getUserId());
-        userPo.setBalance(userAmountDto.getAmount());
-        updateUserById(userPo);
+        UserPo userPo = getUserById(userAmountDto.getUserId());
+        TransactionRecordPo transactionRecordPo = new TransactionRecordPo();
+        if (userAmountDto.getOptType() == 0) {
+            Double balance = userPo.getBalance();
+            balance += userAmountDto.getAmount();
+            userPo.setBalance(balance);
+            updateUserById(userPo);
+            transactionRecordPo.setType("2");
+        } else if (userAmountDto.getOptType() == 1) {
+            Double balance = userPo.getBalance();
+            balance -= userAmountDto.getAmount();
+            if (balance < 0.0) {
+                throw CustomException.userException("余额不足", "用户余额不足");
+            }
+            userPo.setBalance(balance);
+            updateUserById(userPo);
+            transactionRecordPo.setType("1");
+        }
+        transactionRecordPo.setCode(RandomUtil.randomString(6));
+        transactionRecordPo.setChannel("微信");
+        transactionRecordPo.setAmount(userAmountDto.getAmount());
+        AjaxResponse<TransactionRecordPo> record = recordService.saveRecord(transactionRecordPo);
+        if (record == null) {
+            throw CustomException.userException("交易失败", "交易失败");
+        }
     }
 }
 

@@ -25,7 +25,10 @@ Content-Type: application/json
 }
 
 ### 获取用户余额
-GET http://localhost:8080/users/getUserAmount?userId=2
+GET http://localhost:8080/users/getUserAmount?userId=1
+
+### 获取用户余额-服务
+GET http://123.57.39.124:8080/users/getUserAmount?userId=2
 
 ### 更改用户余额
 POST http://localhost:8080/users/updateAmount
@@ -33,5 +36,16 @@ Content-Type: application/json
 
 {
   "userId": 2,
-  "amount": 1100.0
+  "amount": 20.0,
+  "optType": 1
+}
+
+### 更改用户余额-service
+POST http://123.57.39.124:8080/users/updateAmount
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "amount": 20.0,
+  "optType": 1
 }

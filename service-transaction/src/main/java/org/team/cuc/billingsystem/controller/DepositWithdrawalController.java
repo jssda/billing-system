@@ -40,4 +40,10 @@ public class DepositWithdrawalController {
         return AjaxResponse.success(depositWithdrawalService.find(depositWithdrawalBo));
     }
 
+    @PostMapping("/recharge")
+    @ApiOperation(value = "充值")
+    public AjaxResponse<Object> recharge() {
+
+        return AjaxResponse.success();
+    }
 }
