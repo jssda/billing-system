@@ -44,6 +44,7 @@ public class CustomException extends RuntimeException {
         this.info = info;
     }
 
+
     public static CustomException systemException(Exception e) {
         return new CustomException(ExceptionCode.SYSTEM_ERROR, ExceptionUtil.getStackTraceInfo(e),
                 ExceptionCode.SYSTEM_ERROR.getDesc());
@@ -64,6 +65,10 @@ public class CustomException extends RuntimeException {
 
     public static CustomException userException(String message, String info) {
         return new CustomException(ExceptionCode.USER_INPUT_ERROR, message, info);
+    }
+
+    public static CustomException userException(String message) {
+        return new CustomException(ExceptionCode.USER_INPUT_ERROR, message, message);
     }
 
     public int getCode() {

@@ -139,6 +139,21 @@ public class UserServiceImpl implements UserService {
             userPo.setBalance(balance);
             updateUserById(userPo);
             transactionRecordPo.setType("1");
+        } else if (userAmountDto.getOptType() == 3) {
+            Double balance = userPo.getBalance();
+            balance += userAmountDto.getAmount();
+            userPo.setBalance(balance);
+            updateUserById(userPo);
+            transactionRecordPo.setType("3");
+        } else if (userAmountDto.getOptType() == 4) {
+            Double balance = userPo.getBalance();
+            balance -= userAmountDto.getAmount();
+            if (balance < 0.0) {
+                throw CustomException.userException("余额不足", "用户余额不足");
+            }
+            userPo.setBalance(balance);
+            updateUserById(userPo);
+            transactionRecordPo.setType("4");
         }
         transactionRecordPo.setCode(RandomUtil.randomString(6));
         transactionRecordPo.setChannel("微信");

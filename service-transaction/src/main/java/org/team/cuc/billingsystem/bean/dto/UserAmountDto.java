@@ -22,7 +22,7 @@ public class UserAmountDto {
      * 操作类型  0: 加钱，1:减钱
      */
     @NotNull
-    @ApiModelProperty("操作类型  0: 加钱，1:减钱，3：充值，4：提现")
+    @ApiModelProperty("操作类型  0: 加钱，1:减钱")
     private Integer optType;
 
     /**
