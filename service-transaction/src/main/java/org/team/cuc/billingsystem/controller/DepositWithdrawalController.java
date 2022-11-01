@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.team.cuc.billingsystem.bean.bo.AjaxResponse;
 import org.team.cuc.billingsystem.bean.bo.DepositWithdrawalBo;
 import org.team.cuc.billingsystem.bean.bo.OrderPayRequestBo;
+import org.team.cuc.billingsystem.bean.bo.WithdrawBo;
 import org.team.cuc.billingsystem.bean.vo.PageVO;
 import org.team.cuc.billingsystem.po.transaction.DepositWithdrawalPo;
 import org.team.cuc.billingsystem.service.DepositWithdrawalService;
@@ -44,8 +45,14 @@ public class DepositWithdrawalController {
     @PostMapping("/recharge")
     @ApiOperation(value = "充值")
     public AjaxResponse<Object> recharge(OrderPayRequestBo orderPayRequestBo) {
+        depositWithdrawalService.recharge(orderPayRequestBo);
+        return AjaxResponse.success();
+    }
 
-
+    @PostMapping("/withdraw-pre")
+    @ApiOperation("预提现接口，需要审核")
+    public AjaxResponse<Object> withdrawPre(@RequestBody WithdrawBo withdrawBo) {
+        depositWithdrawalService.withdrawPre(withdrawBo);
         return AjaxResponse.success();
     }
 }
