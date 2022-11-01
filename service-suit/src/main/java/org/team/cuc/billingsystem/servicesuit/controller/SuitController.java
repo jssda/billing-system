@@ -1,57 +1,50 @@
 package org.team.cuc.billingsystem.servicesuit.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.team.cuc.billingsystem.bean.bo.AjaxResponse;
 import org.team.cuc.billingsystem.po.suitservice.SuitPo;
+import org.team.cuc.billingsystem.servicesuit.bean.bo.SuitBo;
+import org.team.cuc.billingsystem.servicesuit.bean.bo.ToolBo;
+import org.team.cuc.billingsystem.servicesuit.service.SuitService;
 import org.team.cuc.billingsystem.servicesuit.suitMapper.SuitMapper;
 
+import javax.validation.constraints.NotNull;
+
+@Api(tags = {"套餐"})
 @RestController
 public class SuitController {
     @Autowired
-    SuitMapper suitMapper;
+    SuitService suitService;
 
-    @GetMapping("/listSuit")
-    public String listSuit() {
-        return suitMapper.selectAllSuits().toString();
+    //pass
+    @ApiOperation(value = "列出所有套餐")
+    @PostMapping("/listSuit")
+    public AjaxResponse listSuit(@NotNull(message = "data is null") SuitBo bo) {
+        return AjaxResponse.success(suitService.listSuit(bo));
     }
 
-    @GetMapping("/insertSuit")
-    public String insert() {
-        SuitPo suitPo = new SuitPo();
-        suitPo.setSuitType(2);
-        suitPo.setName("测试");
-        suitPo.setCostType(1);
-        suitPo.setPrice(1.1);
-        suitPo.setStatus(2);
-        suitPo.setCreateUid(123);
-        suitMapper.saveOne(suitPo);
-        return "成功";
+    //pass
+    @ApiOperation(value = "插入一个套餐")
+    @PostMapping("/insertSuit")
+    public AjaxResponse insert(@NotNull(message = "data is null") SuitBo bo) {
+        return AjaxResponse.success(suitService.insertSuit(bo));
     }
 
-    @GetMapping("/updateSuit")
-    public String update() {
-        SuitPo suitPo = new SuitPo();
-        suitPo.setSuitType(11111);
-        suitPo.setName("测试4563333333333");
-        suitPo.setId(2);
-        suitMapper.updateById(suitPo);
-        return "成功";
+    //pass
+    @ApiOperation(value = "更新套餐数据")
+    @PostMapping("/updateSuit")
+    public AjaxResponse update(@NotNull(message = "data is null") SuitBo bo) {
+        return AjaxResponse.success(suitService.updateSuit(bo));
     }
 
-    @GetMapping("/selectById")
-    public String selectById() {
-        SuitPo suitPo = new SuitPo();
-        return  suitMapper.selectSuitById(1).toString();
-    }
-
-    @RequestMapping("/select")
-    @ResponseBody
-    public String selectSuit(SuitPo suitPo) {
-        System.out.println(suitPo.getId());
-        return  suitMapper.selectSuit(suitPo).toString();
+    //pass
+    @ApiOperation(value = "条件查找套餐信息")
+    @PostMapping("/selectSuit")
+    public AjaxResponse selectSuit(@NotNull(message = "data is null") SuitBo bo) {
+        return AjaxResponse.success(suitService.selectById(bo));
     }
 
 

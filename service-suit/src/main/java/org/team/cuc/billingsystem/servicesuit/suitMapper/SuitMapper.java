@@ -3,6 +3,7 @@ package org.team.cuc.billingsystem.servicesuit.suitMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.team.cuc.billingsystem.po.suitservice.SuitPo;
 import org.team.cuc.billingsystem.po.userservice.UserPo;
+import org.team.cuc.billingsystem.servicesuit.bean.bo.ToolBo;
 
 import java.util.List;
 
@@ -48,4 +49,11 @@ public interface SuitMapper {
      * @return 套装信息
      */
     List<SuitPo> selectSuit(SuitPo suitPo);
+
+    /**
+     * 查询套装信息
+     *
+     * @return 套装信息
+     */
+    Integer count(SuitPo suitPo);
 }

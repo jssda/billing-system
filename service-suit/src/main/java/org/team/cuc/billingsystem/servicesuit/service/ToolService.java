@@ -85,4 +85,12 @@ public class ToolService {
             }
         }
     }
+
+    public Integer updateTool(ToolBo tool){
+        return toolMapper.updateById(tool);
+    }
+
+    public Integer insertTool(ToolBo tool){
+        return toolMapper.saveOne(tool);
+    }
 }

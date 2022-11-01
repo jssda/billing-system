@@ -11,6 +11,7 @@ import org.team.cuc.billingsystem.servicesuit.service.ToolService;
 import org.team.cuc.billingsystem.servicesuit.suitMapper.SuitMapper;
 import org.team.cuc.billingsystem.servicesuit.suitMapper.ToolMapper;
 
+import javax.tools.Tool;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -26,30 +27,38 @@ public class ToolController {
     @Autowired
     ToolService toolService;
 
+    //pass
+    @ApiOperation(value = "列出所有组件")
     @PostMapping("/listTool")
     public AjaxResponse listTool( @NotNull(message = "data is null") ToolBo bo) {
         return AjaxResponse.success(toolService.listTools(bo));
     }
 
-    @GetMapping("/updateTool")
-    public String updateSuit() {
-        return toolMapper.selectAllTools().toString();
+    //pass
+    @ApiOperation(value = "更新组件")
+    @PostMapping("/updateTool")
+    public AjaxResponse updateSuit(@NotNull(message = "data is null") ToolBo bo) {
+        return AjaxResponse.success(toolService.updateTool(bo));
     }
 
-    @GetMapping("/insertTool")
-    public String insertTool() {
-        return null;
+    //pass
+    @ApiOperation(value = "插入组件组件")
+    @PostMapping("/insertTool")
+    public AjaxResponse insertTool(@NotNull(message = "data is null") ToolBo bo) {
+        return AjaxResponse.success(toolService.insertTool(bo));
     }
 
-    @GetMapping("/refreshTool2db")
-    public String refreshTool2db() {
-       toolService.refreshTool2db();
-       return "success";
-    }
-
+    //pass
     @ApiOperation(value = "通过套餐列出所有组件")
     @PostMapping("/listToolFromSuit")
     public AjaxResponse listToolFromSuit( @NotNull(message = "data is null") SuitBo bo) {
         return AjaxResponse.success(toolService.listToolsFromSuit(bo));
+    }
+
+    //pass
+    @GetMapping("/refreshTool2db")
+    public String refreshTool2db() {
+        toolService.refreshTool2db();
+        return "success";
     }
 }
